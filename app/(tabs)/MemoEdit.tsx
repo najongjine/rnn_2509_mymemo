@@ -1,4 +1,4 @@
-import { useFocusEffect } from "expo-router";
+import { useFocusEffect, useLocalSearchParams } from "expo-router";
 import React, { useState } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import * as db from "../db/db";
@@ -8,8 +8,14 @@ export default function MemoEdit() {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
 
+  const queryString = useLocalSearchParams();
+  const memoId = Number(queryString?.memoId ?? 0);
+
   async function init() {
     await db.initDB();
+    if (memoId) {
+      const memo = await db.getMemoById(memoId);
+    }
   }
 
   useFocusEffect(
