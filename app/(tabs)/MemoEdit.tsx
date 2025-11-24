@@ -40,7 +40,7 @@ export default function MemoEdit() {
   };
 
   async function onSave() {
-    router.reload("/index");
+    router.replace("/");
   }
 
   return (
