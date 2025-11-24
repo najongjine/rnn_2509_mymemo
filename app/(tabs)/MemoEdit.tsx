@@ -9,11 +9,13 @@ import {
   View,
 } from "react-native";
 import * as db from "../db/db";
+import * as types from "../types/types";
 
 export default function MemoEdit() {
   const [inputHeight, setInputHeight] = useState(40); // 기본 높이 설정
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
+  const [memo, setMemo] = useState<types.Memo>({});
 
   const queryString = useLocalSearchParams();
   const memoId = Number(queryString?.memoId ?? 0);
@@ -40,6 +42,9 @@ export default function MemoEdit() {
   };
 
   async function onSave() {
+    // save 하면 memo 에 데이터 셋팅 하고,
+    // db.updateMemo() 요걸 사용해서 db에 저장해 보세요
+
     router.replace("/");
   }
 
