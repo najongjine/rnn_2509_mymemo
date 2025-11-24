@@ -1,10 +1,23 @@
-import { useState } from "react";
+import { useFocusEffect } from "expo-router";
+import React, { useState } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import * as db from "../db/db";
 
 export default function MemoEdit() {
   const [inputHeight, setInputHeight] = useState(40); // 기본 높이 설정
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
+
+  async function init() {
+    await db.initDB();
+  }
+
+  useFocusEffect(
+    React.useCallback(() => {
+      init();
+      return () => {};
+    }, [])
+  );
 
   // 내용 크기가 변경될 때 호출되는 함수
   const handleContentSizeChange = (event: any) => {
