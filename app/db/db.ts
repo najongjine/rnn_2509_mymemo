@@ -127,6 +127,7 @@ export const updateMemo = async (
 
   try {
     let result: SQLite.SQLiteRunResult;
+    const currentDate = new Date().toISOString();
     if (id) {
       // db.runAsync는 UPDATE 구문에 적합하며, 변경된 행의 수를 반환합니다.
       result = await db.runAsync(
@@ -141,10 +142,11 @@ export const updateMemo = async (
     } else {
       result = await db.runAsync(
         // SQL 쿼리: 새로운 레코드를 삽입 (id는 보통 자동으로 증가)
-        `INSERT INTO memos (title, content) VALUES (?, ?);`,
+        `INSERT INTO memos (title, content, date) VALUES (?, ?, ?);`,
         // 바인딩 값: SQL 쿼리의 '?'에 순서대로 매핑될 값
         title,
-        content
+        content,
+        currentDate
       );
     }
     // changes는 영향을 받은(수정된) 행의 수입니다.
