@@ -3,6 +3,8 @@ import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function MemoEdit() {
   const [inputHeight, setInputHeight] = useState(40); // 기본 높이 설정
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
 
   // 내용 크기가 변경될 때 호출되는 함수
   const handleContentSizeChange = (event: any) => {
@@ -14,13 +16,14 @@ export default function MemoEdit() {
     <ScrollView>
       <Text>메모 작성</Text>
       <View>
-        <TextInput placeholder="제목" />
+        <TextInput placeholder="제목" onChangeText={setTitle} />
       </View>
       <View>
         <TextInput
           placeholder="내용을 입력하세요..."
           multiline={true} // 필수
           onContentSizeChange={handleContentSizeChange}
+          onChangeText={setContent}
           style={[styles.input, { height: Math.max(40, inputHeight) }]} // 최소 높이 40을 유지하면서, 내용 크기에 따라 높이 설정
         />
       </View>
