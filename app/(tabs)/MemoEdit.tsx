@@ -1,6 +1,13 @@
 import { useFocusEffect, useLocalSearchParams } from "expo-router";
 import React, { useState } from "react";
-import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Button,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import * as db from "../db/db";
 
 export default function MemoEdit() {
@@ -31,6 +38,8 @@ export default function MemoEdit() {
     setInputHeight(event.nativeEvent.contentSize.height);
   };
 
+  async function onSave() {}
+
   return (
     <ScrollView>
       <Text>메모 작성</Text>
@@ -45,6 +54,9 @@ export default function MemoEdit() {
           onChangeText={setContent}
           style={[styles.input, { height: Math.max(40, inputHeight) }]} // 최소 높이 40을 유지하면서, 내용 크기에 따라 높이 설정
         />
+      </View>
+      <View>
+        <Button title="저장" onPress={onSave} />
       </View>
     </ScrollView>
   );
