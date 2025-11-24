@@ -1,4 +1,4 @@
-import { useFocusEffect, useLocalSearchParams } from "expo-router";
+import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
   Button,
@@ -17,6 +17,7 @@ export default function MemoEdit() {
 
   const queryString = useLocalSearchParams();
   const memoId = Number(queryString?.memoId ?? 0);
+  const router = useRouter();
 
   async function init() {
     await db.initDB();
@@ -38,7 +39,9 @@ export default function MemoEdit() {
     setInputHeight(event.nativeEvent.contentSize.height);
   };
 
-  async function onSave() {}
+  async function onSave() {
+    router.reload("/index");
+  }
 
   return (
     <ScrollView>
