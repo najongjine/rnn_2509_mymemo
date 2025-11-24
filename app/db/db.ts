@@ -126,18 +126,29 @@ export const updateMemo = async (
   const db = await getDb();
 
   try {
-    // db.runAsync는 UPDATE 구문에 적합하며, 변경된 행의 수를 반환합니다.
-    const result = await db.runAsync(
-      `UPDATE memos SET 
+    let result: SQLite.SQLiteRunResult;
+    if (id) {
+      // db.runAsync는 UPDATE 구문에 적합하며, 변경된 행의 수를 반환합니다.
+      result = await db.runAsync(
+        `UPDATE memos SET 
       title = ?
       , content = ? 
       WHERE id = ?;`,
-      title,
-      content,
-      id
-    );
+        title,
+        content,
+        id
+      );
+    } else {
+      result = await db.runAsync(
+        // SQL 쿼리: 새로운 레코드를 삽입 (id는 보통 자동으로 증가)
+        `INSERT INTO memos (title, content) VALUES (?, ?);`,
+        // 바인딩 값: SQL 쿼리의 '?'에 순서대로 매핑될 값
+        title,
+        content
+      );
+    }
     // changes는 영향을 받은(수정된) 행의 수입니다.
-    return result.changes;
+    return result.lastInsertRowId;
   } catch (error) {
     console.error("Error updating memo:", error);
     throw error;

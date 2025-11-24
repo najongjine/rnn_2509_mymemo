@@ -44,7 +44,7 @@ export default function MemoEdit() {
   async function onSave() {
     // save 하면 memo 에 데이터 셋팅 하고,
     // db.updateMemo() 요걸 사용해서 db에 저장해 보세요
-
+    await db.updateMemo(memoId, title, content);
     router.replace("/");
   }
 
