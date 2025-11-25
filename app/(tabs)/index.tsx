@@ -1,6 +1,6 @@
 import { useFocusEffect } from "expo-router";
 import { useCallback, useState } from "react";
-import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import * as db from "../db/db";
 import * as types from "../types/types";
 
@@ -20,7 +20,7 @@ export default function HomeScreen() {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {/* 헤더 영역 */}
       <View style={styles.headerContainer}>
         <Text style={styles.headerTitle}>메모 리스트</Text>
@@ -44,7 +44,7 @@ export default function HomeScreen() {
           <Text style={styles.emptyText}>메모가 없습니다.</Text>
         }
       />
-    </SafeAreaView>
+    </View>
   );
 }
 
