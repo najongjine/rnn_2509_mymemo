@@ -47,7 +47,7 @@ export default function HomeScreen() {
         keyExtractor={(item) => item?.id?.toString() ?? ""}
         contentContainerStyle={styles.listContent}
         renderItem={({ item }) => (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => onDetailScreen(item?.id ?? 0)}>
             <View style={styles.itemContainer}>
               <View style={styles.itemHeader}>
                 <Text style={styles.itemTitle}>{item?.title}</Text>
