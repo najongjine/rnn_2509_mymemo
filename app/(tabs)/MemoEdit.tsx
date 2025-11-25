@@ -52,7 +52,7 @@ export default function MemoEdit() {
     React.useCallback(() => {
       init();
       return () => {};
-    }, [])
+    }, [memoId])
   );
 
   const handleContentSizeChange = (event: any) => {

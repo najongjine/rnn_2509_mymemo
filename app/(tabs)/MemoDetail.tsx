@@ -43,6 +43,9 @@ export default function MemoDetail() {
     }, [memoId])
   );
 
+  /*
+  수정 버튼 만들고, MemoEdit 으로 가게하기
+   */
   return (
     <ScrollView
       style={[styles.container, { backgroundColor: theme.containerBg }]}
