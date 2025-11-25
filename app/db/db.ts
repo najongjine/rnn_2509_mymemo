@@ -127,7 +127,15 @@ export const updateMemo = async (
 
   try {
     let result: SQLite.SQLiteRunResult;
-    const currentDate = new Date().toISOString();
+    const now = new Date(); // 현재 시간 객체 생성
+
+    // 옵션 설정: 24시간제(hour12: false), 두 자리 숫자 유지(2-digit)
+    const kstTime = now.toLocaleTimeString("ko-KR", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    });
     if (id) {
       // db.runAsync는 UPDATE 구문에 적합하며, 변경된 행의 수를 반환합니다.
       result = await db.runAsync(
@@ -146,7 +154,7 @@ export const updateMemo = async (
         // 바인딩 값: SQL 쿼리의 '?'에 순서대로 매핑될 값
         title,
         content,
-        currentDate
+        kstTime
       );
     }
     // changes는 영향을 받은(수정된) 행의 수입니다.
