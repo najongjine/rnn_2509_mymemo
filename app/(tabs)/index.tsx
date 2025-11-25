@@ -1,7 +1,6 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
-
 import { useFocusEffect } from "expo-router";
 import { useCallback, useState } from "react";
+import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import * as db from "../db/db";
 import * as types from "../types/types";
 
@@ -21,64 +20,78 @@ export default function HomeScreen() {
   );
 
   return (
-    <View>
-      <View>
-        <Text>메모 리스트</Text>
+    <SafeAreaView style={styles.container}>
+      {/* 헤더 영역 */}
+      <View style={styles.headerContainer}>
+        <Text style={styles.headerTitle}>메모 리스트</Text>
       </View>
-      <View>
-        <FlatList
-          data={memos}
-          keyExtractor={(item) => item?.id?.toString() ?? ""}
-          contentContainerStyle={{ padding: 20 }}
-          renderItem={({ item }) => (
-            <View
-              style={{
-                borderBottomWidth: 1,
-                borderColor: "#eee",
-                paddingVertical: 15,
-              }}
-            >
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginBottom: 5,
-                }}
-              >
-                <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                  {item?.title}
-                </Text>
-                {/* 여기서 날짜 변환 한 줄로 처리 */}
-                <Text style={{ color: "#888" }}>{item?.date ?? ""}</Text>
-              </View>
+
+      {/* 리스트 영역 */}
+      <FlatList
+        data={memos}
+        keyExtractor={(item) => item?.id?.toString() ?? ""}
+        contentContainerStyle={styles.listContent}
+        renderItem={({ item }) => (
+          <View style={styles.itemContainer}>
+            <View style={styles.itemHeader}>
+              <Text style={styles.itemTitle}>{item?.title}</Text>
+              <Text style={styles.itemDate}>{item?.date ?? ""}</Text>
             </View>
-          )}
-          ListEmptyComponent={
-            <Text style={{ textAlign: "center", marginTop: 50, color: "#999" }}>
-              메모가 없습니다.
-            </Text>
-          }
-        />
-      </View>
-    </View>
+            {/* 내용 미리보기 등이 필요하면 여기에 추가 */}
+          </View>
+        )}
+        ListEmptyComponent={
+          <Text style={styles.emptyText}>메모가 없습니다.</Text>
+        }
+      />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  headerContainer: {
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: "#eee",
+  },
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#333",
+  },
+  listContent: {
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+  },
+  itemContainer: {
+    borderBottomWidth: 1,
+    borderColor: "#eee",
+    paddingVertical: 15,
+  },
+  itemHeader: {
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    gap: 8,
+    marginBottom: 5,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  itemTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#000",
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
+  itemDate: {
+    fontSize: 14,
+    color: "#888",
+  },
+  emptyText: {
+    textAlign: "center",
+    marginTop: 50,
+    fontSize: 16,
+    color: "#999",
   },
 });
