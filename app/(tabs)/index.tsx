@@ -28,8 +28,10 @@ export default function HomeScreen() {
   );
 
   async function onDetailScreen(memoId: number = 0) {
-    console.log(`onDetailScreen memoid: `, memoId);
-    router.push(`/MemoDetail?memoId=${memoId}`);
+    router.push({
+      pathname: "/MemoDetail",
+      params: { memoId: memoId },
+    });
   }
 
   return (

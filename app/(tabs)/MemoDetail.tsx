@@ -39,7 +39,6 @@ export default function MemoDetail() {
 
   useFocusEffect(
     useCallback(() => {
-      console.log(`queryString: `, queryString);
       init();
     }, [memoId])
   );
