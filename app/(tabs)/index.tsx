@@ -23,7 +23,7 @@ export default function HomeScreen() {
 
   async function onDetailScreen(memoId: number = 0) {
     router.push({
-      pathname: "",
+      pathname: "/MemoDetail",
       params: { memoId: memoId },
     });
   }
