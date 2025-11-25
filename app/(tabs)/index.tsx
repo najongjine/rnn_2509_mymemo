@@ -1,4 +1,4 @@
-import { useFocusEffect } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 import { useCallback, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import * as db from "../db/db";
@@ -6,6 +6,7 @@ import * as types from "../types/types";
 
 export default function HomeScreen() {
   const [memos, setMemos] = useState<types.Memo[]>([]);
+  const router = useRouter();
 
   async function init() {
     await db.initDB();
@@ -19,6 +20,8 @@ export default function HomeScreen() {
       init();
     }, [])
   );
+
+  async function onDetailScreen(memoId: number = 0) {}
 
   return (
     <View style={styles.container}>
