@@ -1,6 +1,12 @@
 import { useFocusEffect, useRouter } from "expo-router";
 import { useCallback, useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import * as db from "../db/db";
 import * as types from "../types/types";
 
@@ -41,13 +47,15 @@ export default function HomeScreen() {
         keyExtractor={(item) => item?.id?.toString() ?? ""}
         contentContainerStyle={styles.listContent}
         renderItem={({ item }) => (
-          <View style={styles.itemContainer}>
-            <View style={styles.itemHeader}>
-              <Text style={styles.itemTitle}>{item?.title}</Text>
-              <Text style={styles.itemDate}>{item?.date ?? ""}</Text>
+          <TouchableOpacity>
+            <View style={styles.itemContainer}>
+              <View style={styles.itemHeader}>
+                <Text style={styles.itemTitle}>{item?.title}</Text>
+                <Text style={styles.itemDate}>{item?.date ?? ""}</Text>
+              </View>
+              {/* 내용 미리보기 등이 필요하면 여기에 추가 */}
             </View>
-            {/* 내용 미리보기 등이 필요하면 여기에 추가 */}
-          </View>
+          </TouchableOpacity>
         )}
         ListEmptyComponent={
           <Text style={styles.emptyText}>메모가 없습니다.</Text>
