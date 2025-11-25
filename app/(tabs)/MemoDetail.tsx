@@ -4,8 +4,9 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
-  useColorScheme, // 다크모드 감지를 위해 추가
+  useColorScheme,
 } from "react-native";
 import * as db from "../db/db";
 import * as types from "../types/types";
@@ -65,6 +66,22 @@ export default function MemoDetail() {
           {memo.content}
         </Text>
       </View>
+      {/* 버튼 영역: 수정/삭제 */}
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={[styles.button, styles.editButton]}
+          onPress={() => {}}
+        >
+          <Text style={styles.buttonText}>수정</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.button, styles.deleteButton]}
+          onPress={() => {}}
+        >
+          <Text style={styles.buttonText}>삭제</Text>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 }
@@ -98,4 +115,36 @@ const styles = StyleSheet.create({
     lineHeight: 26, // 본문 가독성을 위해 줄 간격을 넉넉하게
     textAlign: "left", // 왼쪽 정렬
   },
+
+  // --- 버튼 스타일 추가 ---
+  buttonContainer: {
+    flexDirection: "row", // 가로 배치
+    justifyContent: "space-between", // 사이 간격 균등
+    marginTop: 30, // 본문과의 거리
+    gap: 15, // 버튼 사이의 간격 (React Native 0.71+ 지원)
+  },
+  button: {
+    flex: 1, // 화면 너비를 반반 차지하도록 설정
+    paddingVertical: 15, // 버튼 높이감
+    borderRadius: 12, // 둥근 모서리
+    alignItems: "center",
+    justifyContent: "center",
+    elevation: 2, // 안드로이드 그림자
+    shadowColor: "#000", // iOS 그림자
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  editButton: {
+    backgroundColor: "#2E7D32", // 짙은 초록색 (눈이 편안함)
+  },
+  deleteButton: {
+    backgroundColor: "#D32F2F", // 짙은 빨간색 (경고 느낌)
+  },
+  buttonText: {
+    color: "#FFFFFF", // 흰색 글씨
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  // 버튼 스타일 END
 });
