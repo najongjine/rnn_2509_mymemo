@@ -21,7 +21,12 @@ export default function HomeScreen() {
     }, [])
   );
 
-  async function onDetailScreen(memoId: number = 0) {}
+  async function onDetailScreen(memoId: number = 0) {
+    router.push({
+      pathname: "",
+      params: { memoId: memoId },
+    });
+  }
 
   return (
     <View style={styles.container}>
