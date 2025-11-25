@@ -8,6 +8,7 @@ export default function HomeScreen() {
   const [memos, setMemos] = useState<types.Memo[]>([]);
 
   async function init() {
+    await db.initDB();
     let _memos = await db.getMemos();
     setMemos(_memos);
   }
