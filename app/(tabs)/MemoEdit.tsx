@@ -45,6 +45,9 @@ export default function MemoEdit() {
         setTitle(data.title || "");
         setContent(data.content || "");
       }
+    } else {
+      setTitle("");
+      setContent("");
     }
   }
 
