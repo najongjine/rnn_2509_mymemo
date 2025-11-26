@@ -1,6 +1,7 @@
 import { useFocusEffect, useRouter } from "expo-router";
 import { useCallback, useState } from "react";
 import {
+  Button,
   FlatList,
   StyleSheet,
   Text,
@@ -42,25 +43,38 @@ export default function HomeScreen() {
       </View>
 
       {/* 리스트 영역 */}
-      <FlatList
-        data={memos}
-        keyExtractor={(item) => item?.id?.toString() ?? ""}
-        contentContainerStyle={styles.listContent}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => onDetailScreen(item?.id ?? 0)}>
-            <View style={styles.itemContainer}>
-              <View style={styles.itemHeader}>
-                <Text style={styles.itemTitle}>{item?.title}</Text>
-                <Text style={styles.itemDate}>{item?.date ?? ""}</Text>
+      <View>
+        <FlatList
+          data={memos}
+          keyExtractor={(item) => item?.id?.toString() ?? ""}
+          contentContainerStyle={styles.listContent}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => onDetailScreen(item?.id ?? 0)}>
+              <View style={styles.itemContainer}>
+                <View style={styles.itemHeader}>
+                  <Text style={styles.itemTitle}>{item?.title}</Text>
+                  <Text style={styles.itemDate}>{item?.date ?? ""}</Text>
+                </View>
+                {/* 내용 미리보기 등이 필요하면 여기에 추가 */}
               </View>
-              {/* 내용 미리보기 등이 필요하면 여기에 추가 */}
-            </View>
-          </TouchableOpacity>
-        )}
-        ListEmptyComponent={
-          <Text style={styles.emptyText}>메모가 없습니다.</Text>
-        }
-      />
+            </TouchableOpacity>
+          )}
+          ListEmptyComponent={
+            <Text style={styles.emptyText}>메모가 없습니다.</Text>
+          }
+        />
+      </View>
+      <View>
+        <Button
+          title="+메모작성"
+          onPress={() => {
+            router.push({
+              pathname: "/MemoEdit",
+              params: { memoId: 0 },
+            });
+          }}
+        />
+      </View>
     </View>
   );
 }
