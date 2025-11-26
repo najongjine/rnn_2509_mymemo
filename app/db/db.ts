@@ -164,3 +164,18 @@ export const updateMemo = async (
     throw error;
   }
 };
+
+export const deleteMemoById = async (id: number): Promise<boolean> => {
+  const db = await getDb();
+  try {
+    // 실행(INSERT, UPDATE, DELETE)에는 runAsync를 사용합니다.
+    const result = await db.runAsync(`DELETE FROM memos WHERE id = ?;`, [id]);
+
+    // result.changes는 삭제된 행의 개수입니다.
+    // 0보다 크면 삭제 성공, 0이면 해당 ID가 없어서 삭제 안 됨.
+    return result.changes > 0;
+  } catch (error) {
+    console.error("Error deleting memo:", error);
+    throw error;
+  }
+};
