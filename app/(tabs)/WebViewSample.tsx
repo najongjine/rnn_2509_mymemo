@@ -1,4 +1,5 @@
 import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import { useCallback } from "react";
 import {
   ScrollView,
@@ -7,6 +8,7 @@ import {
   View,
   useColorScheme,
 } from "react-native";
+import { WebView } from "react-native-webview";
 
 export default function WebViewSample() {
   // 1. 다크모드 감지 및 색상 설정
@@ -42,6 +44,14 @@ export default function WebViewSample() {
       <View>
         <Text>웹뷰 샘플</Text>
       </View>
+      <View>
+        {/* WebView 컴포넌트 사용 */}
+        <WebView
+          source={{ uri: "https://m.naver.com" }} // 띄우고 싶은 웹사이트 주소
+          style={styles.webview}
+        />
+        <StatusBar style="auto" />
+      </View>
     </ScrollView>
   );
 }
@@ -52,5 +62,8 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     padding: 20,
+  },
+  webview: {
+    flex: 1, // 화면 전체를 채우도록 설정
   },
 });
