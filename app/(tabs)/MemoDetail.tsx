@@ -1,6 +1,7 @@
 import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import { useCallback, useState } from "react";
 import {
+  Alert,
   ScrollView,
   StyleSheet,
   Text,
@@ -70,16 +71,42 @@ export default function MemoDetail() {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={[styles.button, styles.editButton]}
-          onPress={() => {}}
+          onPress={() => {
+            router.push({
+              pathname: "/MemoEdit",
+              params: { memoId: memoId },
+            });
+          }}
         >
           <Text style={styles.buttonText}>수정</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={[styles.button, styles.deleteButton]}
-          onPress={() => {}}
+          onPress={() => {
+            Alert.alert(
+              "삭제 확인", // 제목
+              "진짜로 삭제하시겠습니까?", // 내용
+              [
+                {
+                  text: "취소",
+                  style: "cancel", // iOS에서 볼드체/파란색 등으로 표시됨
+                  onPress: () => console.log("취소됨"),
+                },
+                {
+                  text: "삭제",
+                  style: "destructive", // iOS에서 빨간색으로 표시됨
+                  onPress: () => {
+                    // 여기에 원래 있던 삭제 로직을 넣으세요
+                    db.deleteMemoById(memoId);
+                    router.replace("/");
+                  },
+                },
+              ]
+            );
+          }}
         >
-          <Text style={styles.buttonText}>삭제</Text>
+          <Text>삭제하기</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
