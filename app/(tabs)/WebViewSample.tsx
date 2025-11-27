@@ -1,8 +1,8 @@
 import { ActivityIndicator, Platform, StyleSheet, View } from "react-native";
 import { WebView } from "react-native-webview";
 
-export default function TabTwoScreen() {
-  const targetUrl = "https://itsec-react-2509.vercel.app/lotto"; // 띄우고 싶은 웹사이트 주소
+export default function WebViewSample() {
+  const targetUrl = "m.naver.com"; // 띄우고 싶은 웹사이트 주소
 
   // 구글 로그인을 뚫기 위한 UserAgent 설정 (안드로이드/iOS 구별)
   // "wv"라는 단어를 제거하여 일반 브라우저인 척합니다.

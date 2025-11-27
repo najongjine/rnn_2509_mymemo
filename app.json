@@ -9,9 +9,33 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "LSApplicationQueriesSchemes": [
+          "kakaotalk",
+          "naversearchapp",
+          "naversearchthirdlogin",
+          "payco",
+          "lpayapp",
+          "shinhan-sr-ansimclick",
+          "smshinhanansimclick",
+          "hdcardappcardansimclick",
+          "mpocket.online.ansimclick",
+          "lotteappcard",
+          "kb-acp",
+          "ispmobile"
+        ]
+      }
     },
     "android": {
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": {
+            "scheme": "http"
+          }
+        }
+      ],
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
